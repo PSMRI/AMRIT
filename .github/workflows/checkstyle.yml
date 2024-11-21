@@ -1,0 +1,26 @@
+name: Checkstyle
+
+on:
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - '**/*.java'
+      - '.github/workflows/checkstyle.yml'
+
+jobs:
+  checkstyle:
+    name: Checkstyle Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Checkstyle
+        uses: nikitasavinov/checkstyle-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: 'github-pr-check'
+          tool_name: 'checkstyle'
+          level: 'error'
+          fail_on_error: true
