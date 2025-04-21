@@ -3,10 +3,6 @@ name: 🧹 Lint Commit Messages
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
-  push:
-    branches:
-      - main
-      - dev
 
 jobs:
   commitlint:
@@ -16,11 +12,11 @@ jobs:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v3
 
-      - name: ⎔ Setup Node.js
-        uses: actions/setup-node@v3
+      - name: ⎔ Setup Node.js with Cache
+        uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
+          cache: 'npm'
           cache-dependency-path: package-lock.json
 
       - name: 📦 Install dependencies
