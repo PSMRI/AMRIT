@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Abhijeet-DJ/AMRIT#readme",
   "devDependencies": {
-    "commitizen": "^4.3.1"
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0"
   }
 }
