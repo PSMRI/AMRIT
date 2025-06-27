@@ -135,7 +135,7 @@ A huge thanks to all our contributors! Their efforts power AMRIT’s growth, and
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/yashpatil641"><img src="https://avatars.githubusercontent.com/u/156583847?v=4?s=100" width="100px;" alt="Yash Patil"/><br /><sub><b>Yash Patil</b></sub></a><br /><a href="#code-yashpatil641" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://devsuraj.me"><img src="https://avatars.githubusercontent.com/u/123288511?v=4?s=100" width="100px;" alt="Suraj"/><br /><sub><b>Suraj</b></sub></a><br /><a href="#code-Suraj-kumar00" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Suraj-kumar00"><img src="https://avatars.githubusercontent.com/u/123288511?v=4?s=100" width="100px;" alt="Suraj"/><br /><sub><b>Suraj</b></sub></a><br /><a href="#code-Suraj-kumar00" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
