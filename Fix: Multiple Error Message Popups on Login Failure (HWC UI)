@@ -1,0 +1,22 @@
+When login fails due to invalid credentials, multiple error popups are displayed on the login screen instead of a single error message.
+🔗 Related Module
+
+Ayushman Arogya Mandir (AAM) – HWC UI
+Backend: AMRIT (Java + Spring Boot)
+
+This results in:
+
+Poor user experience
+
+Confusing UI behavior
+
+Redundant error notifications
+
+
+The issue was caused by duplicate error handling, where:
+
+Error was being handled in the component level (login component)
+
+The same error was also handled in the global HTTP interceptor
+
+This resulted in multiple toast/alert messages being triggered for a single failed API response.
