@@ -45,6 +45,8 @@ body:
     attributes:
       label: Acceptance Criteria
       description: List the acceptance criteria for this feature.
+    validations:
+      required: true
 
   - type: textarea
     id: ticket-implementation-details
@@ -208,7 +210,7 @@ body:
         - Data Science
         - Deprecation
         - Documentation
-        - Delpoyment
+        - Deployment
         - Frontend
         - Internationalization
         - Localization
