@@ -76,7 +76,7 @@ To run API repositories locally, please follow the guide [here](https://piramal-
 | BeneficiaryID-Generation-API | [BeneficiaryID-Generation-API](https://github.com/PSMRI/BeneficiaryID-Generation-API) | AMRIT API microservice for generation and management of unique beneficiary IDs. | 8092 |
 | FHIR-API | [FHIR-API](https://github.com/PSMRI/FHIR-API) | Service that implements FHIR standard for healthcare information exchange between various systems that are used by clinicians and organisations | 8093 |
 | Identity-API | [Identity-API](https://github.com/PSMRI/Identity-API) | Identity API is a microservice that is used for the creation and management of beneficiaries. | 8094 |
-| Identity-1097-API | [Identity-API](https://github.com/PSMRI/Identity-API) | Identity-1097 API is a microservice that is used for the creation and management of beneficiaries(1097Identity Profile). | 8095 |
+| Identity-1097-API | [Identity-1097-API](https://github.com/PSMRI/Identity-API) | Identity-1097 API is a microservice that is used for the creation and management of beneficiaries (1097 Identity Profile). Runs as a separate instance of Identity-API. | 8095 |
 
 Note: These ports should be used when running the services in a local development environment.
 
@@ -89,14 +89,14 @@ Mobile applications are built with Kotlin and powered by AMRIT Platform REST API
 | FLW-Mobile-App | [FLW-Mobile-App](https://github.com/PSMRI/FLW-Mobile-App) | Android Application built in Kotlin. Powered by AMRIT Platform. FLW Mobile App is designed for healthcare programs and consultation services rendered by ASHAs to serve pregnant women, mothers, and newborns in India. |
 | HWC-Mobile-App | [HWC-Mobile-App](https://github.com/PSMRI/HWC-Mobile-App) | Android Application built with Kotlin for Health and Wellness Centre management. Takes care of workflows of CHOs, Doctors, Nurses, Lab technicians and Pharmacists. |
 
-#### Documentation repositories
+#### Infrastructure & Tooling repositories
 
-The following repositories contain documentation related to AMRIT Platform.
+The following repositories contain infrastructure, tooling, and documentation related to AMRIT Platform.
 
 | Repository Name | Link | Description |
 |------------------|------|-------------|
 | AMRIT-Docs | [AMRIT-Docs](https://github.com/PSMRI/AMRIT-Docs) | AMRIT developer documentation synced with GitBook. |
-| AMRIT-DB | [AMRIT-DB](https://github.com/PSMRI/AMRIT-DB) | DB service to simplify database schema management and setting up local environments. Using Flyway for migrations, it ensures consistency in DB schema for deployments. |
+| AMRIT-DB | [AMRIT-DB](https://github.com/PSMRI/AMRIT-DB) | Infrastructure tooling for database schema management. Uses Flyway migrations to ensure schema consistency across local and deployed environments. |
 | AMRIT-Website | [AMRIT-Website](https://github.com/PSMRI/AMRIT-Website) | Website for AMRIT. This is a forked repo to create AMRIT Website. |
 | AMRIT-DevOps | [AMRIT-DevOps](https://github.com/PSMRI/AMRIT-DevOps) | All things DevOps related for AMRIT are housed in this repo. |
 
