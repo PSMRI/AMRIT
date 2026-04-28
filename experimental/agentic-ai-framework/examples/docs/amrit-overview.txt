@@ -1,0 +1,12 @@
+AMRIT is a digital health platform with multiple Angular UI repositories, Spring Boot API repositories, Kotlin mobile applications, and supporting documentation/tooling repositories.
+
+Important module families include:
+
+- Helpline104 UI and API for 104 health information helplines
+- Helpline1097 UI and API for AIDS health information helplines
+- HWC UI and API for Health and Wellness Centre workflows
+- MMU UI and API for Mobile Medical Unit workflows
+- Common UI and Common API shared across modules
+- Identity API for beneficiary creation and management
+
+Contributors should identify the affected UI/API/mobile repositories before planning implementation.
