@@ -38,7 +38,11 @@ class DocumentIndex:
         documents: list[IndexedDocument] = []
         for path in paths:
             if path.is_dir():
-                candidates = sorted(path.rglob("*.md"))
+                candidates = sorted(
+                    candidate
+                    for candidate in path.rglob("*")
+                    if candidate.suffix in {".md", ".txt"}
+                )
             else:
                 candidates = [path]
             for candidate in candidates:

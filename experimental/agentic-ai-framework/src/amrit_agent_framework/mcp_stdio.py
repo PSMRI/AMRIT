@@ -13,21 +13,27 @@ from pathlib import Path
 from typing import Any
 
 from amrit_agent_framework.indexer import DocumentIndex
+from amrit_agent_framework.repo_map import RepositoryMap
 from amrit_agent_framework.skills import generate_implementation_plan
 
 
-def serve(paths: list[Path]) -> None:
+def serve(paths: list[Path], repo_manifest: Path | None = None) -> None:
     index = DocumentIndex.from_paths(paths)
+    repository_map = RepositoryMap.from_path(repo_manifest)
     for line in sys.stdin:
         if not line.strip():
             continue
         request = json.loads(line)
-        response = handle_request(request, index)
+        response = handle_request(request, index, repository_map)
         sys.stdout.write(json.dumps(response, sort_keys=True) + "\n")
         sys.stdout.flush()
 
 
-def handle_request(request: dict[str, Any], index: DocumentIndex) -> dict[str, Any]:
+def handle_request(
+    request: dict[str, Any],
+    index: DocumentIndex,
+    repository_map: RepositoryMap | None = None,
+) -> dict[str, Any]:
     method = request.get("method")
     request_id = request.get("id")
     params = request.get("params") or {}
@@ -50,7 +56,7 @@ def handle_request(request: dict[str, Any], index: DocumentIndex) -> dict[str, A
             results = [result.to_dict() for result in index.search(str(arguments.get("query", "")))]
             return {"id": request_id, "result": {"content": results}}
         if tool_name == "generate_implementation_plan":
-            plan = generate_implementation_plan(str(arguments.get("ticket", "")), index)
+            plan = generate_implementation_plan(str(arguments.get("ticket", "")), index, repository_map)
             return {"id": request_id, "result": {"content": plan.to_dict()}}
 
     return {

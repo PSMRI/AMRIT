@@ -8,6 +8,7 @@ from pathlib import Path
 
 from amrit_agent_framework.indexer import DocumentIndex
 from amrit_agent_framework.mcp_stdio import serve
+from amrit_agent_framework.repo_map import RepositoryMap
 from amrit_agent_framework.skills import generate_implementation_plan
 
 
@@ -20,6 +21,7 @@ def build_parser() -> argparse.ArgumentParser:
         required=True,
         help="Markdown file or directory to index. Repeat for multiple paths.",
     )
+    parser.add_argument("--repo-manifest", type=Path, help="Optional AMRIT repository manifest JSON.")
     subcommands = parser.add_subparsers(dest="command", required=True)
 
     search = subcommands.add_parser("search")
@@ -35,15 +37,16 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_parser().parse_args()
     docs = list(args.docs)
+    repository_map = RepositoryMap.from_path(args.repo_manifest)
     if args.command == "serve":
-        serve(docs)
+        serve(docs, args.repo_manifest)
         return
 
     index = DocumentIndex.from_paths(docs)
     if args.command == "search":
         payload = [result.to_dict() for result in index.search(args.query)]
     else:
-        payload = generate_implementation_plan(args.ticket, index).to_dict()
+        payload = generate_implementation_plan(args.ticket, index, repository_map).to_dict()
     print(json.dumps(payload, indent=2, sort_keys=True))
 
 

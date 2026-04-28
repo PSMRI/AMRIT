@@ -1,0 +1,25 @@
+{
+  "repositories": [
+    {
+      "name": "Identity-API",
+      "type": "api",
+      "stack": "Spring Boot",
+      "purpose": "beneficiary creation and management",
+      "port": 8094
+    },
+    {
+      "name": "Helpline104-UI",
+      "type": "ui",
+      "stack": "Angular",
+      "purpose": "104 health information helpline",
+      "port": 4211
+    },
+    {
+      "name": "Helpline104-API",
+      "type": "api",
+      "stack": "Spring Boot",
+      "purpose": "104 health information helpline API",
+      "port": 8091
+    }
+  ]
+}

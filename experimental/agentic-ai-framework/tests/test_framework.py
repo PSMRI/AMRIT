@@ -2,6 +2,7 @@ from pathlib import Path
 
 from amrit_agent_framework.indexer import DocumentIndex
 from amrit_agent_framework.mcp_stdio import handle_request
+from amrit_agent_framework.repo_map import RepositoryMap
 from amrit_agent_framework.skills import generate_implementation_plan
 
 
@@ -18,9 +19,13 @@ def test_index_search_finds_relevant_module_context():
 
 def test_generate_plan_includes_context_and_review_risks():
     index = DocumentIndex.from_paths([ROOT / "examples" / "docs"])
-    plan = generate_implementation_plan("Add beneficiary registration support", index)
+    repo_map = RepositoryMap.from_path(ROOT / "examples" / "repo_manifest.json")
+    plan = generate_implementation_plan("Add beneficiary registration support in Identity API", index, repo_map)
 
     assert plan.context
+    assert plan.repositories
+    assert plan.repositories[0]["name"] == "Identity-API"
+    assert plan.standards["cross_repo"]
     assert any("domain review" in risk for risk in plan.risks)
     assert len(plan.steps) >= 3
 
@@ -34,6 +39,7 @@ def test_json_rpc_tool_call_searches_docs():
             "params": {"name": "search_docs", "arguments": {"query": "helpline 104"}},
         },
         index,
+        RepositoryMap.from_path(ROOT / "examples" / "repo_manifest.json"),
     )
 
     assert response["id"] == 1

@@ -1,5 +1,3 @@
-# AMRIT Overview
-
 AMRIT is a digital health platform with multiple Angular UI repositories, Spring Boot API repositories, Kotlin mobile applications, and supporting documentation/tooling repositories.
 
 Important module families include:
