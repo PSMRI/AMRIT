@@ -1,4 +1,4 @@
-# CLAUDE.md for `PSMRI/AMRIT`
+# AI Assistant Guide for `PSMRI/AMRIT`
 
 This repository is the AMRIT **coordination hub**. It contains documentation, issue templates, and contributor metadata. It does **not** contain deployable UI/API/mobile application code.
 
@@ -29,7 +29,7 @@ Primary references:
 - Keep changes small, specific, and easy to review.
 - Prefer factual markdown updates over broad rewrites.
 - Link PRs to issues (`Closes #...`) when applicable.
-- For contributor table updates, use the all-contributors flow instead of manual edits.
+- For contributor table updates, use the all-contributors flow instead of manual edits (see https://allcontributors.org/ for workflow details).
 
 ## Service/Controller/Component Patterns
 
