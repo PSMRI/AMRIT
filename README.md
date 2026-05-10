@@ -29,6 +29,134 @@ We're thrilled that you're interested in contributing to this project! Here's ho
 6. **Join the Community**  
    Have questions or want to connect with other contributors? Join our [Discord Server](https://discord.gg/FVQWsf5ENS) to chat with the team and community.
 
+---
+
+## 🏗️ Understanding the AMRIT Ecosystem
+
+AMRIT is not a single application — it is a **platform of interconnected service lines**, each serving a distinct part of India's public healthcare delivery system. Every service line has its own Angular frontend, Spring Boot backend API, and shares a common beneficiary identity layer.
+
+### Service Lines
+
+| Service Line | Who Uses It | What It Does |
+|---|---|---|
+| **HWC** (Health and Wellness Centre) | CHOs, Nurses, Doctors, Lab Technicians, Pharmacists | End-to-end clinical workflows — OPD, NCD screening, lab investigations, prescriptions, and referrals at primary health facilities |
+| **MMU** (Mobile Medical Unit) | Field health teams | Clinical care delivery from mobile vans in remote areas — mirrors HWC workflows in a portable deployment |
+| **Helpline 104** | Call centre agents | Telephony-integrated health information and referral helpline; integrates with IVR and teleconsultation |
+| **Helpline 1097** | Call centre agents | Pan-India AIDS/HIV information helpline with beneficiary counselling workflows |
+| **ECD** (Early Childhood Development) | ASHA supervisors | Structured follow-up calls for pregnant women, mothers, and newborns; tracks developmental milestones |
+| **FLW** (Frontline Worker) | ASHAs | Android mobile app for doorstep maternal and child health services |
+| **HWC Mobile** | CHOs, Doctors | Android app replicating HWC workflows for offline-capable facility operations |
+| **Scheduler** | Specialists, HWC staff | Appointment slot management for specialist teleconsultation |
+
+### How the Repos Connect
+
+Each service line follows the same layered pattern:
+
+```
+Angular UI  ──►  Spring Boot API  ──►  MySQL (via AMRIT-DB / Flyway)
+                      │
+                      ├──►  Identity-API  (beneficiary creation & lookup)
+                      ├──►  Common-API    (shared services: DMS, call centre bridge)
+                      └──►  Admin-API     (facility, user, and config management)
+```
+
+| Frontend (Angular) | Backend (Spring Boot) | Shared Dependencies |
+|---|---|---|
+| HWC-UI (port 4204) | HWC-API (port 8085) | Identity-API, Common-API, Admin-API |
+| MMU-UI (port 4202) | MMU-API (port 8087) | Identity-API, Common-API, Admin-API |
+| TM-UI (port 4203) | TM-API (port 8089) + Scheduler-API (port 8088) | Identity-API, Common-API |
+| Helpline104-UI (port 4211) | Helpline104-API (port 8091) | Identity-API, Common-API |
+| Helpline1097-UI (port 4210) | Helpline1097-API (port 8090) | Identity-1097-API, Common-API |
+| ECD-UI (port 4209) | ECD-API (port 8084) | Identity-API, Common-API |
+| Inventory-UI (port 4201) | Inventory-API (port 8086) | Admin-API |
+| HWC-Inventory-UI (port 4207) | Inventory-API (port 8086) | Admin-API |
+| HWC-Scheduler-UI (port 4206) | Scheduler-API (port 8088) | — |
+| Scheduler-UI (port 4208) | Scheduler-API (port 8088) | — |
+| ADMIN-UI (port 4205) | Admin-API (port 8082) | — |
+| FLW-Mobile-App | FLW-API (port 8081) | Identity-API |
+| HWC-Mobile-App | HWC-API (port 8085) | Identity-API |
+
+> **Tip for new contributors**: If you are fixing a bug in `HWC-UI`, the corresponding backend is `HWC-API`. Changes to shared patient data (e.g., beneficiary registration) live in `Identity-API`, not in individual service APIs.
+
+### Beneficiary Data Flow
+
+A typical patient visit flows through AMRIT like this:
+
+```
+1. Beneficiary registered / looked up  ──►  Identity-API
+2. Visit opened at facility             ──►  HWC-API / MMU-API
+3. Nurse records vitals, history        ──►  HWC-API (nurse endpoints)
+4. Doctor writes prescription           ──►  HWC-API (doctor endpoints)
+5. Lab test ordered & resulted          ──►  HWC-API (lab technician endpoints)
+6. Medicine dispensed from pharmacy     ──►  Inventory-API
+7. Referral to specialist               ──►  Scheduler-API (slot booking)
+8. Teleconsultation                     ──►  TM-API
+```
+
+---
+
+## 🧭 New Contributor Journey
+
+Follow these steps to make your first meaningful contribution:
+
+### Step 1 — Understand the issue before touching code
+
+All bugs and feature requests are filed in [this repository's Issues](https://github.com/PSMRI/AMRIT/issues). Read the issue, identify which repository it belongs to (look at the label or the description), and clone only that repo.
+
+### Step 2 — Set up prerequisites
+
+Make sure you have the following installed before cloning any AMRIT repository:
+
+| Tool | Required Version | Used By |
+|---|---|---|
+| Java (JDK) | 17 | All Spring Boot APIs |
+| Maven | 3.8+ | All Spring Boot APIs |
+| Node.js | 18+ | All Angular UIs |
+| Angular CLI | 16+ | All Angular UIs |
+| Docker & Docker Compose | Latest stable | Local stack setup |
+| MySQL | 8.0+ | All APIs (or run via Docker) |
+| Redis | 6+ | Session management in APIs |
+
+> **For UI repos** follow the [UI setup guide](https://piramal-swasthya.gitbook.io/amrit/developer-guide/development-environment-setup/installation-instructions/for-ui-repositories).  
+> **For API repos** follow the [API setup guide](https://piramal-swasthya.gitbook.io/amrit/developer-guide/development-environment-setup/installation-instructions/for-api-repositories).
+
+### Step 3 — Run the database migrations
+
+AMRIT uses [Flyway](https://flywaydb.org/) for schema management. Migration scripts live in [AMRIT-DB](https://github.com/PSMRI/AMRIT-DB). Run them against your local MySQL instance before starting any API. Each API's `application.properties` points to a specific schema — check the repo's README for the correct schema name.
+
+### Step 4 — Start services in the right order
+
+When running locally, start services in this order:
+
+```
+1. MySQL  →  2. Redis  →  3. Admin-API  →  4. Identity-API  →  5. Common-API
+→  6. <target service API>  →  7. <target service UI>
+```
+
+Starting a UI without its backend (or its backend without Identity-API) will result in failed logins or empty screens.
+
+### Step 5 — Create a focused branch and PR
+
+- Branch naming: `fix/<short-description>` or `feat/<short-description>`
+- Keep one logical change per PR
+- Link your PR to the issue: add `Closes #<issue-number>` in the PR description
+- PRs go to the **specific service repo** (e.g., HWC-API), not to this repository
+
+---
+
+## 🔧 Common Local Setup Issues
+
+| Symptom | Likely Cause | Fix |
+|---|---|---|
+| API starts but login always fails | Admin-API not running or wrong `common-url` in properties | Start Admin-API first; check `application.properties` for `common.url` |
+| `NullPointerException` in Common-API logs on startup | Missing Redis connection or missing env variable | Verify Redis is running on the configured port; check `spring.redis.*` properties |
+| UI shows blank screen after login | Backend API not reachable from UI (CORS or wrong port) | Confirm the API is running on its expected port; check `environment.ts` in the UI |
+| Flyway migration fails | Wrong MySQL schema or missing `CREATE SCHEMA` privilege | Create the schema manually; grant the DB user full privileges on it |
+| `Helpline104-UI` fails to start locally | Angular version mismatch or missing `.env` | Follow [issue #123](https://github.com/PSMRI/AMRIT/issues/123) — run `npm install --legacy-peer-deps` |
+| `Helpline104-API` fails to start | Missing property files | See [issue #122](https://github.com/PSMRI/AMRIT/issues/122) — copy the sample properties and configure DB credentials |
+
+---
+
 ## 📦 Repositories  
 
 Below is the list of AMRIT's UI and API repositories with details:  
