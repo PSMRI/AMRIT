@@ -1,0 +1,47 @@
+name: "📖 Documentation Improvement"
+description: "Suggest improvements or report issues in AMRIT's documentation."
+labels: ["documentation", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve our documentation! Clear docs make AMRIT accessible to everyone.
+
+  - type: dropdown
+    id: docs_location
+    attributes:
+      label: Where is the documentation located?
+      description: Select the relevant repository or site.
+      options:
+        - "AMRIT Hub (README, Guidelines)"
+        - "AMRIT-Docs (GitBook)"
+        - "AMRIT-Website"
+        - "Within a specific API/UI repository"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: Description of the Issue/Improvement
+      description: Describe what is wrong, missing, or could be improved in the documentation.
+      placeholder: E.g., The setup instructions for FLW-API are outdated...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_changes
+    attributes:
+      label: Proposed Changes (Optional)
+      description: How would you rewrite or structure the documentation?
+    validations:
+      required: false
+
+  - type: input
+    id: links
+    attributes:
+      label: Relevant Links
+      description: Please provide links to the specific documentation pages or files.
+    validations:
+      required: false
