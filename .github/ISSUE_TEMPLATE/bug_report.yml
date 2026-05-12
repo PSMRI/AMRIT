@@ -1,0 +1,80 @@
+name: "🐛 Bug Report"
+description: "Create a report to help us improve AMRIT by fixing a bug."
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Which component does this bug affect?
+      description: Select the relevant AMRIT repository/module.
+      options:
+        - "AMRIT Hub (This Repo)"
+        - "AMRIT-Docs"
+        - "Common-UI / Common-API"
+        - "Inventory-UI / Inventory-API"
+        - "MMU-UI / MMU-API"
+        - "TM-UI / TM-API"
+        - "HWC-UI / HWC-API"
+        - "ADMIN-UI / Admin-API"
+        - "Scheduler-UI / Scheduler-API / HWC-Scheduler-UI"
+        - "ECD-UI / ECD-API"
+        - "Helpline (1097 / 104) UI / API"
+        - "Identity-API / BeneficiaryID-Generation-API"
+        - "FHIR-API"
+        - "Mobile Apps (FLW / HWC)"
+        - "Other / Not Sure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe the bug here...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce the problem?
+      value: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: What environment are you running this on? (e.g., Local Dev, Staging, Browser version, OS)
+      placeholder: OS, Browser, Node/Java version, etc.
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+    validations:
+      required: false
