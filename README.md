@@ -31,6 +31,8 @@ We're thrilled that you're interested in contributing to this project! Here's ho
 
 ## 📦 Repositories  
 
+To see how these repositories interact, please check out the [Ecosystem Architecture Diagram](docs/ARCHITECTURE.md).
+
 Below is the list of AMRIT's UI and API repositories with details:  
 
 #### UI repositories
