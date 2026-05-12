@@ -23,41 +23,41 @@ graph TD
     classDef db fill:#eceff1,stroke:#607d8b,stroke-width:2px,color:#263238
 
     subgraph "Client Layer (Angular UIs)"
-        UI_Common[Common-UI]:::ui
-        UI_Admin[ADMIN-UI]:::ui
-        UI_Inv[Inventory-UI / HWC-Inventory-UI]:::ui
-        UI_MMU[MMU-UI]:::ui
-        UI_TM[TM-UI]:::ui
-        UI_HWC[HWC-UI]:::ui
-        UI_Sched[Scheduler-UI / HWC-Scheduler-UI]:::ui
-        UI_ECD[ECD-UI]:::ui
-        UI_Help[Helpline1097-UI / Helpline104-UI]:::ui
+        UI_Common["Common-UI"]:::ui
+        UI_Admin["ADMIN-UI"]:::ui
+        UI_Inv["Inventory-UI / HWC-Inventory-UI"]:::ui
+        UI_MMU["MMU-UI"]:::ui
+        UI_TM["TM-UI"]:::ui
+        UI_HWC["HWC-UI"]:::ui
+        UI_Sched["Scheduler-UI / HWC-Scheduler-UI"]:::ui
+        UI_ECD["ECD-UI"]:::ui
+        UI_Help["Helpline1097-UI / Helpline104-UI"]:::ui
     end
 
     subgraph "Client Layer (Mobile Apps)"
-        Mob_FLW[FLW-Mobile-App]:::mobile
-        Mob_HWC[HWC-Mobile-App]:::mobile
+        Mob_FLW["FLW-Mobile-App"]:::mobile
+        Mob_HWC["HWC-Mobile-App"]:::mobile
     end
 
     subgraph "API / Service Layer (Spring Boot Microservices)"
-        API_Common[Common-API]:::api
-        API_Admin[Admin-API]:::api
-        API_Inv[Inventory-API]:::api
-        API_MMU[MMU-API]:::api
-        API_TM[TM-API]:::api
-        API_HWC[HWC-API]:::api
-        API_Sched[Scheduler-API]:::api
-        API_ECD[ECD-API]:::api
-        API_Help[Helpline1097-API / Helpline104-API]:::api
-        API_FLW[FLW-API]:::api
+        API_Common["Common-API"]:::api
+        API_Admin["Admin-API"]:::api
+        API_Inv["Inventory-API"]:::api
+        API_MMU["MMU-API"]:::api
+        API_TM["TM-API"]:::api
+        API_HWC["HWC-API"]:::api
+        API_Sched["Scheduler-API"]:::api
+        API_ECD["ECD-API"]:::api
+        API_Help["Helpline1097-API / Helpline104-API"]:::api
+        API_FLW["FLW-API"]:::api
         
-        API_Id[Identity-API / Identity-1097-API]:::core
-        API_Ben[BeneficiaryID-Generation-API]:::core
-        API_FHIR[FHIR-API]:::core
+        API_Id["Identity-API / Identity-1097-API"]:::core
+        API_Ben["BeneficiaryID-Generation-API"]:::core
+        API_FHIR["FHIR-API"]:::core
     end
 
     subgraph "Data & Infra Layer"
-        DB[AMRIT-DB (Flyway)]:::db
+        DB["AMRIT-DB (Flyway)"]:::db
     end
 
     %% Client to API Connections
