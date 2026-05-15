@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "amrit-docs": {
+      "command": "node",
+      "args": ["./mcp-servers/amrit-docs-mcp/dist/index.js"],
+      "description": "AMRIT documentation and coding standards search"
+    }
+  }
+}

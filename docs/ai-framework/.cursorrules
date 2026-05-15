@@ -1,0 +1,74 @@
+# AMRIT Cursor Rules
+# Place this file at the root of any AMRIT repository.
+# Cursor will automatically load this context for all AI completions.
+
+## Project Identity
+
+This is an AMRIT repository — part of the Accessible Medical Records via
+Integrated Technologies platform built by Piramal Swasthya Management and
+Research Institute (PSMRI) for frontline healthcare workers in India.
+
+AMRIT serves ASHA workers, ANMs, nurses, doctors, and pharmacists across
+rural India. All code you write may affect real health outcomes for
+pregnant women, newborns, and at-risk populations. Write carefully.
+
+## Repository Map
+
+AMRIT consists of multiple repositories:
+- HWC-API / FLW-API / Common-API / Identity-API — Java/Spring Boot backends
+- HWC-UI / ECD-UI / MMU-UI / ADMIN-UI — Angular frontends
+- FLW-Mobile-App / HWC-Mobile-App — Kotlin/Android apps
+
+## Universal Rules (all repos)
+
+- Soft delete only — never hard delete records (healthcare audit requirement)
+- All entities carry audit fields: createdBy, createdDate (never updated after insert)
+- Authentication is token-based; never store credentials in code
+- Never log patient data (PII) at INFO level or above
+- Beneficiary IDs: `beneficiaryRegID` (server) ≠ `beneficiaryId` (local) — never conflate
+
+## Spring Boot Rules (HWC-API, FLW-API, Common-API)
+
+- Package root: `com.iemr.*`
+- Layers: controller → service → repo (NOT repository)
+- Repos extend JpaRepository, named `*Repo`
+- Services named `*ServiceImpl`, use `@Transactional(rollbackFor = Exception.class)`
+- Controllers are thin — no business logic, just parse JSON + call service
+- Use `InputMapper.gson().fromJson()` to deserialize, `OutputMapper().gson().toJson()` to serialize
+- Return type of controller methods is `String` (JSON string), not ResponseEntity
+- All endpoints need `@CrossOrigin()` and `headers = "Authorization"`
+- Table names prefixed `t_` (e.g. `t_anc_care`)
+- Use `deleted = false` boolean for soft delete
+- Never use Jackson — AMRIT uses Gson throughout
+
+## Angular Rules (HWC-UI, ECD-UI, MMU-UI)
+
+- Check package.json Angular version before writing — match it exactly
+- NgModule pattern (not standalone) in existing repos
+- All HTTP calls via `HttpServiceService` — never inject `HttpClient` directly
+- API URLs in `environment.ts` — never hardcode URLs
+- Use `ConfirmationService` for all alerts/dialogs — never `window.alert()`
+- Use `ReactiveFormsModule` — never template-driven forms
+- Import `MaterialModule` from `core/material.module.ts`
+- Services declared in feature module `providers`
+
+## Kotlin/Android Rules (FLW-Mobile-App, HWC-Mobile-App)
+
+- Min SDK 25 — never use java.time.*, paddingHorizontal/Vertical XML attrs,
+  or ThreadLocal.withInitial{}
+- Room entities named `*Cache`, syncState is Int (0/1/2), never Boolean isSynced
+- Always guard migrations with tableExists() and columnExists()
+- Use Flow + StateFlow — never LiveData
+- Use ViewBinding — never synthetics or findViewById
+- All network calls use withContext(Dispatchers.IO) + try/catch
+- Never mark syncState = 2 before confirmed API response
+- SharedPreferences only via PreferenceDao — never access directly
+
+## What Good Code Looks Like Here
+
+Good: Reads like the surrounding codebase. Uses the same patterns.
+Good: Handles offline scenarios (Android) or network failures (all layers).
+Good: Carries audit fields and soft-delete support.
+Bad: Introduces new frameworks or patterns not already in the repo.
+Bad: Hard-codes configuration values.
+Bad: Logs patient-identifiable data.
