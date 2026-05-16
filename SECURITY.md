@@ -74,7 +74,7 @@ The following are **in scope** for security reports:
 
 The following are **out of scope**:
 
-- Vulnerabilities in third-party dependencies (please report these to the respective upstream projects)
+- Vulnerabilities in third-party dependencies that do not directly affect AMRIT (please report these to the respective upstream projects)
 - Issues that require physical access to infrastructure
 - Social engineering attacks
 - Rate limiting or denial-of-service issues without demonstrated patient data risk
