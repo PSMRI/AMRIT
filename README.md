@@ -88,6 +88,7 @@ Mobile applications are built with Kotlin and powered by AMRIT Platform REST API
 |------------------|------|-------------|
 | FLW-Mobile-App | [FLW-Mobile-App](https://github.com/PSMRI/FLW-Mobile-App) | Android Application built in Kotlin. Powered by AMRIT Platform. FLW Mobile App is designed for healthcare programs and consultation services rendered by ASHAs to serve pregnant women, mothers, and newborns in India. |
 | HWC-Mobile-App | [HWC-Mobile-App](https://github.com/PSMRI/HWC-Mobile-App) | Android Application built with Kotlin for Health and Wellness Centre management. Takes care of workflows of CHOs, Doctors, Nurses, Lab technicians and Pharmacists. |
+| STOP-TB-App | [STOP-TB-App](https://github.com/PSMRI/STOP-TB-App) | Android Application built with Kotlin for TB programs. Supports beneficiary registration, TB screening, general examination, referrals, suspected TB tracking and confirmed TB follow-up with offline-first field workflows. |
 
 #### Infrastructure & Tooling repositories
 
@@ -107,6 +108,21 @@ The following repositories contain infrastructure, tooling, and documentation re
 - **[JIRA for Issue Tracking and Management](https://support.piramalfoundation.org/jira/projects/AMM/issues)**: Find user stories, upcoming features, and bugs that are actively being worked on by PSMRI.  
 - **[Confluence for Product Documentation](https://pmp.piramalswasthya.org/confluence/display/AMRIT)**: Access detailed product documentation and learn more about AMRIT’s features.  
 
+
+## Core Maintainers
+
+The core maintainers steward AMRIT's roadmap, review pull requests, and keep the platform healthy across releases.
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="25%"><a href="https://github.com/drtechie"><img src="https://avatars.githubusercontent.com/u/1007084?v=4?s=100" width="100px;" alt="Mithun James"/><br /><sub><b>Mithun James</b></sub></a><br /><sub>@drtechie</sub></td>
+      <td align="center" valign="top" width="25%"><a href="https://github.com/snehar-nd"><img src="https://avatars.githubusercontent.com/u/77656297?v=4?s=100" width="100px;" alt="Sneha R H"/><br /><sub><b>Sneha R H</b></sub></a><br /><sub>@snehar-nd</sub></td>
+      <td align="center" valign="top" width="25%"><a href="https://github.com/vanitha1822"><img src="https://avatars.githubusercontent.com/u/116701245?v=4?s=100" width="100px;" alt="Vanitha S"/><br /><sub><b>Vanitha S</b></sub></a><br /><sub>@vanitha1822</sub></td>
+      <td align="center" valign="top" width="25%"><a href="https://github.com/NikhilFegade"><img src="https://avatars.githubusercontent.com/u/32419145?v=4?s=100" width="100px;" alt="Nikhil Fegade"/><br /><sub><b>Nikhil Fegade</b></sub></a><br /><sub>@NikhilFegade</sub></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Contributors
 
